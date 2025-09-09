@@ -11,8 +11,8 @@ const Header = () => {
 			<header className="flex justify-between h-[82px] max-w-[1240px] mx-auto items-center">
 				<Image src={logoDark} alt="Logo" width="63" height="47.25" />
 				<nav className="text-[#1e1e1e] font-secondary font-medium text-[18px] flex gap-10 items-center">
-					{NAVIGATION.map((item) => (
-						<p key={item.name}>
+					{NAVIGATION.map((item, idx) => (
+						<p key={idx}>
 							<a href={item.href}>{item.name}</a>
 						</p>
 					))}
