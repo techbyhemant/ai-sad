@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { LuInstagram } from 'react-icons/lu';
@@ -28,7 +30,7 @@ const Footer = () => {
 					<FooterList heading="Products" items={PRODUCTS_LIST} />
 					<FooterList heading="Services" items={SERVICES_LIST} />
 					<FooterList heading="Pages" items={NAVIGATION} />
-					<PrimaryBtn />
+					<PrimaryBtn title="Get a consultation" onClick={() => {}} />
 				</div>
 			</div>
 		</footer>

@@ -42,6 +42,8 @@
 	--radius-lg: var(--radius);
 	--radius-xl: calc(var(--radius) + 4px);
 	--text-md: 16px;
+
+	--swiper-navigation-sides-offset: 20px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -86,6 +88,7 @@
 	--sidebar-ring: oklch(0.708 0 0);
 
 	--color-primary-4: #1e1e1e;
+	--swiper-navigation-sides-offset: -10px;
 }
 
 .dark {
@@ -136,5 +139,11 @@
 	h5,
 	h6 {
 		@apply font-secondary;
+	}
+}
+
+@layer components {
+	.swiper-button-prev {
+		@apply z-10;
 	}
 }

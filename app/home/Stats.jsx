@@ -33,7 +33,12 @@ const Stats = () => {
 	return (
 		<section className="flex items-center justify-stretch h-[374px]">
 			{STATS.map((stat) => (
-				<Stat bg={stat.bg} stat={stat.value} description={stat.description} />
+				<Stat
+					key={stat.id}
+					bg={stat.bg}
+					stat={stat.value}
+					description={stat.description}
+				/>
 			))}
 		</section>
 	);

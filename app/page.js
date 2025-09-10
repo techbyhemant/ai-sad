@@ -5,6 +5,7 @@ import Categories from './home/Categories';
 import Stats from './home/Stats';
 import Values from './home/Values';
 import Services from './home/Services';
+import Testimonials from './home/Testimonials';
 
 export default function Home() {
 	return (
@@ -16,6 +17,7 @@ export default function Home() {
 				<Values />
 				<Stats />
 				<Services />
+				<Testimonials />
 			</main>
 			<Footer />
 		</div>
