@@ -1,12 +1,11 @@
 'use client';
 
-import React, { useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md';
-import { Navigation, Autoplay } from 'swiper/modules';
+import { useRef } from 'react';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Button } from '@/components/ui/button';
+import { Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const TESTIMONIALS = [
 	{

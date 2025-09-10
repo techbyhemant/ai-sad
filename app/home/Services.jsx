@@ -45,10 +45,10 @@ const Service = ({ heading, image, description }) => {
 				<Image
 					src={image}
 					alt={heading}
-					className="object-cover h-full w-full"
+					className="object-cover h-full w-full rounded-sm"
 				/>
 			</div>
-			<div className="flex-1 flex flex-col justify-between items-start gap-20">
+			<div className="w-1/2 flex flex-col justify-between items-start gap-20 h-full">
 				<div className="min-w-full space-y-3">
 					<p className="uppercase text-[18px] font-normal">Services we offer</p>
 					<div className="border-b-2 border-[#6E6E6E]" />
@@ -77,7 +77,7 @@ const Services = () => {
 				modules={[Mousewheel]}
 				mousewheel={true}
 				pagination={{ clickable: true }}
-				spaceBetween={0}
+				spaceBetween={10}
 				slidesPerView={1}
 				className="h-full"
 			>
