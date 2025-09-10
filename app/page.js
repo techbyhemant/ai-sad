@@ -6,6 +6,7 @@ import Stats from './home/Stats';
 import Values from './home/Values';
 import Services from './home/Services';
 import Testimonials from './home/Testimonials';
+import NewsAndArticles from './home/NewsAndArticles';
 
 export default function Home() {
 	return (
@@ -18,6 +19,7 @@ export default function Home() {
 				<Stats />
 				<Services />
 				<Testimonials />
+				<NewsAndArticles />
 			</main>
 			<Footer />
 		</div>
