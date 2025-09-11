@@ -8,6 +8,7 @@ import Services from './home/Services';
 import Testimonials from './home/Testimonials';
 import NewsAndArticles from './home/NewsAndArticles';
 import ProductFullWidth from './home/ProductFullWidth';
+import Locations from './home/Locations';
 
 export default function Home() {
 	return (
@@ -19,6 +20,7 @@ export default function Home() {
 				<Values />
 				<Stats />
 				<Services />
+				<Locations />
 				<Testimonials />
 				<NewsAndArticles />
 				<ProductFullWidth />
