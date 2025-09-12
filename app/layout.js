@@ -1,4 +1,4 @@
-import { Nunito_Sans, Instrument_Sans } from 'next/font/google';
+import { Instrument_Sans, Nunito_Sans } from 'next/font/google';
 import './globals.css';
 
 const getInstrumentSans = Instrument_Sans({
