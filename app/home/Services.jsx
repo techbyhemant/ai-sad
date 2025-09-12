@@ -41,14 +41,15 @@ const SERVICES = [
 const Service = ({ heading, image, description }) => {
 	return (
 		<div className="flex gap-12 w-full h-full text-black">
-			<div className="w-1/2 flex-1">
+			<div className="max-w-1/2">
 				<Image
 					src={image}
 					alt={heading}
-					className="object-cover h-full w-full rounded-sm"
+					className="object-cover h-full rounded-sm"
 				/>
 			</div>
-			<div className="w-1/2 flex flex-col justify-between items-start gap-20 h-full">
+
+			<div className="flex-1 flex flex-col justify-between items-start gap-20 h-full">
 				<div className="min-w-full space-y-3">
 					<p className="uppercase text-[18px] font-normal">Services we offer</p>
 					<div className="border-b-2 border-[#6E6E6E]" />
