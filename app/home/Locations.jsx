@@ -1,54 +1,226 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import {
+  ComposableMap,
+  Geographies,
+  Geography,
+  Marker,
+  Annotation,
+} from "react-simple-maps";
+
+const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+
+const locations = [
+  {
+    name: "Saudi Arabia",
+    coordinates: [45.0792, 23.8859],
+    projects: 45,
+    description:
+      "We have completed over 45 successful projects across the country and are currently working on many more",
+    isHighlighted: true,
+  },
+  {
+    name: "Iraq",
+    coordinates: [43.6793, 33.2232],
+    projects: 12,
+    description:
+      "Active construction projects in major cities including Baghdad and Basra",
+  },
+  {
+    name: "Turkey",
+    coordinates: [35.2433, 38.9637],
+    projects: 8,
+    description:
+      "Engineering and infrastructure development projects across the region",
+  },
+  {
+    name: "Iran",
+    coordinates: [53.688, 32.4279],
+    projects: 15,
+    description:
+      "Industrial and commercial construction projects in key economic zones",
+  },
+  {
+    name: "India",
+    coordinates: [78.9629, 20.5937],
+    projects: 22,
+    description:
+      "Large-scale infrastructure projects including highways and commercial developments",
+  },
+];
 
 const Locations = () => {
+  const [selectedLocation, setSelectedLocation] = useState(locations[0]);
+
+  const handleMarkerClick = (location) => {
+    setSelectedLocation(location);
+  };
+
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-white">
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fadeInDelay {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in {
+          animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .animate-fade-in-delay {
+          animation: fadeInDelay 0.5s ease-out 0.2s both;
+        }
+      `}</style>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Our Locations
+        <div className="flex justify-between items-start ">
+          <h2 className="text-4xl font-bold text-gray-900 leading-tight">
+            Growing Steadily
+            <br />
+            With Finesse
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            We serve clients across multiple locations with our comprehensive
-            construction and engineering services.
-          </p>
+          <p className="text-gray-900 font-medium">Store locator</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">
-              Main Office
-            </h3>
-            <div className="space-y-2 text-gray-600">
-              <p>123 Construction Avenue</p>
-              <p>Building District, BD 12345</p>
-              <p>Phone: (555) 123-4567</p>
-              <p>Email: info@company.com</p>
-            </div>
-          </div>
+        <div className="relative">
+          <ComposableMap
+            projection="geoMercator"
+            projectionConfig={{
+              scale: 500,
+              center: [55, 28],
+            }}
+            width={800}
+            height={500}
+            style={{ width: "100%", height: "auto" }}
+          >
+            <Geographies geography={geoUrl}>
+              {({ geographies }) =>
+                geographies.map((geo) => {
+                  const p = geo.properties || {};
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">
-              Regional Office
-            </h3>
-            <div className="space-y-2 text-gray-600">
-              <p>456 Engineering Plaza</p>
-              <p>Industrial Zone, IZ 67890</p>
-              <p>Phone: (555) 987-6543</p>
-              <p>Email: regional@company.com</p>
-            </div>
-          </div>
+                  // Try ISO codes first, then country names
+                  const iso =
+                    p.ISO_A3 || p.iso_a3 || p.ADM0_A3 || p.ISO_A3_EH || null;
+                  const name = p.NAME || p.name || p.ADMIN || null;
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">
-              Service Center
+                  const colorByIso = {
+                    SAU: "#4C4C4C",
+                    IRQ: "#4C4C4C",
+                    TUR: "#4C4C4C",
+                    IRN: "#4C4C4C",
+                    EGY: "#4C4C4C",
+                    JOR: "#4C4C4C",
+                    SYR: "#4C4C4C",
+                    LBN: "#4C4C4C",
+                    ISR: "#4C4C4C",
+                    PSE: "#4C4C4C",
+                    KWT: "#4C4C4C",
+                    BHR: "#4C4C4C",
+                    QAT: "#4C4C4C",
+                    ARE: "#4C4C4C",
+                    OMN: "#4C4C4C",
+                    YEM: "#4C4C4C",
+                  };
+
+                  const colorByName = {
+                    "Saudi Arabia": "#4C4C4C",
+                    Iraq: "#4C4C4C",
+                    Turkey: "#4C4C4C",
+                    Iran: "#4C4C4C",
+                    Egypt: "#4C4C4C",
+                    Jordan: "#4C4C4C",
+                    Syria: "#4C4C4C",
+                    Lebanon: "#4C4C4C",
+                    Israel: "#4C4C4C",
+                    Palestine: "#4C4C4C",
+                    Kuwait: "#4C4C4C",
+                    Bahrain: "#4C4C4C",
+                    Qatar: "#4C4C4C",
+                    "United Arab Emirates": "#4C4C4C",
+                    Oman: "#4C4C4C",
+                    Yemen: "#4C4C4C",
+                  };
+
+                  const fillColor =
+                    (iso && colorByIso[iso]) ||
+                    (name && colorByName[name]) ||
+                    "#C7C7C7";
+
+                  return (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      stroke="#e5e7eb"
+                      strokeWidth={1}
+                      style={{
+                        default: { fill: fillColor, outline: "none" },
+                        hover: { fill: fillColor, outline: "none" },
+                        pressed: { fill: fillColor, outline: "none" },
+                      }}
+                    />
+                  );
+                })
+              }
+            </Geographies>
+
+            {locations.map((location, index) => (
+              <Marker key={index} coordinates={location.coordinates}>
+                <circle
+                  r={6}
+                  fill="#1f2937"
+                  stroke={
+                    selectedLocation.name === location.name
+                      ? "#10b981"
+                      : "#374151"
+                  }
+                  strokeWidth={selectedLocation.name === location.name ? 3 : 2}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleMarkerClick(location)}
+                />
+              </Marker>
+            ))}
+          </ComposableMap>
+
+          {/* Fade Effect Overlay */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: `
+                linear-gradient(180deg, rgba(255, 255, 255, 0) 70.67%, #FFFFFF 95.19%),
+                linear-gradient(180deg, #FFFFFF 12.98%, rgba(255, 255, 255, 0) 42.79%),
+                linear-gradient(270deg, #FFFFFF 6.54%, rgba(255, 255, 255, 0) 17.04%),
+                linear-gradient(270deg, rgba(255, 255, 255, 0) 81.07%, #FFFFFF 93.56%)
+              `,
+            }}
+          />
+
+          {/* Dynamic Info Box */}
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-[#04724D] text-white p-4 rounded-lg max-w-xs transition-all duration-500 ease-in-out">
+            <h3 className="text-lg font-bold mb-2 animate-fade-in">
+              {selectedLocation.name}
             </h3>
-            <div className="space-y-2 text-gray-600">
-              <p>789 Service Street</p>
-              <p>Commercial Area, CA 54321</p>
-              <p>Phone: (555) 456-7890</p>
-              <p>Email: service@company.com</p>
-            </div>
+            <p className="text-green-100 text-xs animate-fade-in-delay">
+              {selectedLocation.description ||
+                `We have completed over ${selectedLocation.projects} successful projects across the country and are currently working on many more`}
+            </p>
           </div>
         </div>
       </div>
