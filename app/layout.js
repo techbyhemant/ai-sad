@@ -1,5 +1,7 @@
 import { Instrument_Sans, Nunito_Sans } from 'next/font/google';
 import './globals.css';
+import Header from './home/Header';
+import Footer from './home/Footer';
 
 const getInstrumentSans = Instrument_Sans({
 	variable: '--font-instrument',
@@ -22,7 +24,11 @@ export default function RootLayout({ children }) {
 			<body
 				className={`${getInstrumentSans.variable} ${getNunitoSans.variable} antialiased`}
 			>
-				{children}
+				<div>
+					<Header />
+					{children}
+					<Footer />
+				</div>
 			</body>
 		</html>
 	);
