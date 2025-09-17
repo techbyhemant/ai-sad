@@ -43,6 +43,7 @@
 	--radius-xl: calc(var(--radius) + 4px);
 	--text-md: 16px;
 
+	--color-primary-green: var(--primary-green);
 	--swiper-navigation-sides-offset: 20px;
 }
 
@@ -88,6 +89,7 @@
 	--sidebar-ring: oklch(0.708 0 0);
 
 	--color-primary-4: #1e1e1e;
+	--primary-green: #04724d;
 	--swiper-navigation-sides-offset: -10px;
 }
 

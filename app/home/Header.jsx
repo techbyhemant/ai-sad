@@ -7,10 +7,10 @@ import { Button } from '@/components/ui/button';
 
 const Header = () => {
 	return (
-		<div className="bg-white">
+		<div className="bg-white hidden md:block">
 			<header className="flex justify-between h-[82px] max-w-[1240px] mx-auto items-center pl-16 pr-6">
 				<Image src={logoDark} alt="Logo" width="63" height="47.25" />
-				<nav className="text-[#1e1e1e] font-secondary font-medium text-[18px] flex gap-10 items-center">
+				<nav className="text-[#1e1e1e] font-secondary font-medium text-[18px] hidden sm:flex gap-10 items-center ">
 					{NAVIGATION.map((item, idx) => (
 						<p key={idx}>
 							<a href={item.href}>{item.name}</a>

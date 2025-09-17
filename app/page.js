@@ -12,20 +12,20 @@ import Locations from './home/Locations';
 
 export default function Home() {
 	return (
-		<div className="flex flex-col ">
+		<div className="flex flex-col">
 			<Header />
 			<main className="flex-1 max-w-[1240px] mx-auto w-full h-full">
-				<Categories />
+				{/* <Categories /> */}
 				<Products />
-				<Values />
-				<Stats />
+				{/* <Values /> */}
+				{/* <Stats /> */}
 				<Services />
 				<Locations />
 				<Testimonials />
 				<NewsAndArticles />
 				<ProductFullWidth />
 			</main>
-			<Footer />
+			{/* <Footer /> */}
 		</div>
 	);
 }

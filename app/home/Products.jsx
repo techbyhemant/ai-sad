@@ -42,19 +42,21 @@ const PRODUCTS = [
 
 const Product = ({ image, title, description, onClick }) => {
 	return (
-		<divj className="flex items-center gap-14">
+		<divj className="flex items-center flex-col gap-8 md:flex-row md:gap-14">
 			<Image
 				src={image}
 				alt={title}
-				className="w-1/2 object-cover rounded-sm h-[327px]"
+				className="w-full md:w-1/2 object-cover rounded-sm h-[153px] md:h-[327px]"
 			/>
 
-			<div className="w-1/2 flex flex-col items-start gap-4">
-				<p className="font-secondary text-sm font-semibold text-[#19417C]">
+			<div className="w-full md:w-1/2 flex flex-col items-start gap-4">
+				<p className="font-secondary text-xs md:text-sm font-semibold text-[#19417C]">
 					NEW LAUNCH
 				</p>
-				<h3 className="font-semibold text-primary text-4xl">{title}</h3>
-				<p className="text-xl text-primary">{description}</p>
+				<h3 className="font-semibold text-primary text-xl md:text-4xl">
+					{title}
+				</h3>
+				<p className="text-sm md:text-xl text-primary">{description}</p>
 				<PrimaryBtn title="Know more" onClick={onClick} />
 			</div>
 		</divj>
@@ -72,7 +74,7 @@ const Products = () => {
 	}, []);
 
 	return (
-		<section className="bg-white w-full p-[85px] pb-16 relative">
+		<section className="bg-white w-full py-10 px-4 md:p-[85px] md:pb-16 relative">
 			<div className="relative group max-w-full mx-auto">
 				{activeIndex > 0 && (
 					<div className="absolute top-1/2 -left-10 transform -translate-y-1/2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
