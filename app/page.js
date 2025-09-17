@@ -17,7 +17,7 @@ export default function Home() {
 			<main className="flex-1 max-w-[1240px] mx-auto w-full h-full">
 				{/* <Categories /> */}
 				<Products />
-				{/* <Values /> */}
+				<Values />
 				{/* <Stats /> */}
 				<Services />
 				<Locations />
