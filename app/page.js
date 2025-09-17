@@ -18,7 +18,7 @@ export default function Home() {
 				{/* <Categories /> */}
 				<Products />
 				<Values />
-				{/* <Stats /> */}
+				<Stats />
 				<Services />
 				<Locations />
 				<Testimonials />
