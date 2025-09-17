@@ -44,6 +44,7 @@
 	--text-md: 16px;
 
 	--color-primary-green: var(--primary-green);
+	--color-light-blue: var(--light-blue);
 	--swiper-navigation-sides-offset: 20px;
 }
 
@@ -90,6 +91,7 @@
 
 	--color-primary-4: #1e1e1e;
 	--primary-green: #04724d;
+	--light-blue: #19417c;
 	--swiper-navigation-sides-offset: -10px;
 }
 
