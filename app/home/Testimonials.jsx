@@ -33,14 +33,16 @@ const TESTIMONIALS = [
 const Testimonial = ({ name, designation, description }) => {
 	return (
 		<div className="flex flex-col gap-4 items-start text-black">
-			<p className="text-md font-secondary text-primary">Testimonials</p>
+			<p className="text-sm sm:text-md font-secondary text-primary">
+				Testimonials
+			</p>
 			<div>
-				<h3 className="text-4xl text-[#04724D] font-semibold font-primary">
+				<h3 className="text-xl sm:text-4xl text-primary-green font-semibold font-primary">
 					{name}
 				</h3>
-				<p className="text-sm font-normal">{designation}</p>
+				<p className="text-xs sm:text-sm font-normal">{designation}</p>
 			</div>
-			<p className="text-md font-normal">{description}</p>
+			<p className="text-sm sm:text-md font-normal">{description}</p>
 		</div>
 	);
 };
@@ -49,15 +51,15 @@ const Testimonials = () => {
 	const swiperRef = useRef(null);
 
 	return (
-		<section className="bg-white w-full h-[323px] p-20 relative">
-			<div className="absolute top-1/2 left-15 transform -translate-y-1/2 z-20">
+		<section className="bg-white w-lvw h-[323px] p-10 sm:p-20 relative">
+			<div className="absolute top-1/2 -left-0 transform -translate-y-1/2 z-20">
 				<MdKeyboardArrowLeft
 					className="text-black cursor-pointer"
 					size={40}
 					onClick={() => swiperRef.current?.slidePrev()}
 				/>
 			</div>
-			<div className="absolute top-1/2 right-15 transform -translate-y-1/2 z-20">
+			<div className="absolute top-1/2 right-0 transform -translate-y-1/2 z-20">
 				<MdKeyboardArrowRight
 					className="text-black cursor-pointer"
 					size={40}
@@ -75,7 +77,7 @@ const Testimonials = () => {
 				onSwiper={(swiper) => {
 					swiperRef.current = swiper;
 				}}
-				className="max-w-4xl"
+				className="min-w-[291px]!"
 			>
 				{TESTIMONIALS.map((testimonial) => (
 					<SwiperSlide key={testimonial.id}>

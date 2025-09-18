@@ -4,9 +4,37 @@ import Image from 'next/image';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { LuInstagram } from 'react-icons/lu';
 import logoLight from '../../public/assets/logo-light.svg';
-import FooterList from './FooterList';
-import { NAVIGATION, PRODUCTS_LIST, SERVICES_LIST } from './const';
+
 import PrimaryBtn from '../shared/Buttons/PrimaryBtn';
+import FooterList from './FooterList';
+import { NAV_ITEMS } from '../Header';
+
+const FOOTER_NAV_ITEMS = [
+	{
+		heading: 'Products',
+		items: [
+			{ name: 'Architectural fittings', path: '' },
+			{ name: 'Fittings', path: '' },
+			{ name: 'Tools', path: '' },
+			{ name: 'Building Accessories', path: '' },
+			{ name: 'Storage', path: '' },
+			{ name: 'Adhesive', path: '' },
+			{ name: 'Special Components', path: '' },
+		],
+	},
+	{
+		heading: 'Services',
+		items: [
+			{ name: 'Trading, Import', path: '' },
+			{ name: 'Export Capabilities', path: '' },
+			{ name: 'Trading, Import/Export Capabilities', path: '' },
+		],
+	},
+	{
+		heading: 'Pages',
+		items: NAV_ITEMS,
+	},
+];
 
 const Footer = () => {
 	return (
@@ -28,9 +56,9 @@ const Footer = () => {
 
 				<div className="flex flex-col justify-between">
 					<div className="grid grid-flow-col auto-cols-auto gap-24">
-						<FooterList heading="Products" items={PRODUCTS_LIST} />
-						<FooterList heading="Services" items={SERVICES_LIST} />
-						<FooterList heading="Pages" items={NAVIGATION} />
+						{FOOTER_NAV_ITEMS.map((nav, idx) => (
+							<FooterList key={idx} heading={nav.heading} items={nav.items} />
+						))}
 						<PrimaryBtn
 							title="Get a consultation"
 							styles="font-normal text-sm"

@@ -1,5 +1,7 @@
 import { Instrument_Sans, Nunito_Sans } from 'next/font/google';
 import './globals.css';
+import Header from './Header';
+import Footer from './Footer';
 
 const getInstrumentSans = Instrument_Sans({
 	variable: '--font-instrument',
@@ -22,7 +24,15 @@ export default function RootLayout({ children }) {
 			<body
 				className={`${getInstrumentSans.variable} ${getNunitoSans.variable} antialiased`}
 			>
-				{children}
+				<div className="flex flex-col w-full h-full min-h-[100vh] overflow-x-hidden">
+					<div className="h-5 w-full bg-white backdrop-blur-md py-4 items-center fixed top-0 z-10">
+						<Header />
+					</div>
+					<main className="flex flex-col flex-1 justify-start items-center relative min-h-[50vh] mt-5">
+						{children}
+					</main>
+					<div className="py-20">{/* <Footer /> */}</div>
+				</div>
 			</body>
 		</html>
 	);
