@@ -32,7 +32,7 @@ const TESTIMONIALS = [
 
 const Testimonial = ({ name, designation, description }) => {
 	return (
-		<div className="flex flex-col gap-4 items-start text-black">
+		<div className="flex flex-col gap-4 items-start text-black max-w-full">
 			<p className="text-sm sm:text-md font-secondary text-primary">
 				Testimonials
 			</p>
@@ -51,7 +51,7 @@ const Testimonials = () => {
 	const swiperRef = useRef(null);
 
 	return (
-		<section className="bg-white w-lvw h-[323px] p-10 sm:p-20 relative">
+		<section className="bg-white w-lvw sm:w-full h-[323px] p-10 sm:p-20 relative">
 			<div className="absolute top-1/2 left-0 sm:left-20 transform -translate-y-1/2 z-20">
 				<MdKeyboardArrowLeft
 					className="text-black cursor-pointer"

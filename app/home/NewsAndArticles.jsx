@@ -47,7 +47,7 @@ const NewsAndArticles = () => {
 				New & Articles
 			</h3>
 			<div className="overflow-hidden w-full">
-				<div className="flex gap-6 overflow-x-auto flex-nowrap sm:grid sm:grid-cols-3 sm:gap-10 sm:overflow-visible snap-x snap-mandatory">
+				<div className="flex gap-6 overflow-x-auto flex-nowrap sm:grid sm:grid-cols-3 sm:gap-10 sm:overflow-visible snap-x snap-mandatory scrollbar-hide">
 					{ARTICLES.map((article) => (
 						<div
 							key={article.id}
