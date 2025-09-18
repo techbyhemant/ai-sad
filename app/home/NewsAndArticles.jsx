@@ -32,7 +32,7 @@ const Article = ({ image, heading, description }) => {
 			<div className="h-[232px] w-full relative">
 				<Image src={image} alt={heading} fill className="object-cover" />
 			</div>
-			<div className="">
+			<div>
 				<h4 className="font-semibold text-2xl">{heading}</h4>
 				<p className="font-secondary font-medium text-md mt-2">{description}</p>
 			</div>
@@ -47,11 +47,11 @@ const NewsAndArticles = () => {
 				New & Articles
 			</h3>
 			<div className="overflow-hidden w-full">
-				<div className="flex gap-6 overflow-x-auto flex-nowrap pb-4 sm:grid sm:grid-cols-3 sm:gap-20 sm:overflow-visible scrollbar-hide snap-x snap-mandatory">
+				<div className="flex gap-6 overflow-x-auto flex-nowrap sm:grid sm:grid-cols-3 sm:gap-10 sm:overflow-visible snap-x snap-mandatory">
 					{ARTICLES.map((article) => (
 						<div
 							key={article.id}
-							className="min-w-full flex-1 snap-center sm:min-w-0"
+							className="max-w-full flex-shrink-0 snap-start sm:min-w-0 sm:flex-shrink scrollbar-hide"
 						>
 							<Article
 								image={article.image}

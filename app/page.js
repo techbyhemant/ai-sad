@@ -11,7 +11,7 @@ import Locations from './home/Locations';
 export default function Home() {
 	return (
 		<div className="flex flex-col overflow-x-hidden">
-			<main className="w-full max-w-[1440px] mx-auto  h-full">
+			<main className="w-full max-w-[1440px] mx-auto h-full">
 				{/* <Categories /> */}
 				<Products />
 				<Values />
@@ -20,7 +20,7 @@ export default function Home() {
 				<Locations />
 				<Testimonials />
 				<NewsAndArticles />
-				{/* <ProductFullWidth /> */}
+				<ProductFullWidth />
 			</main>
 			{/* <Footer /> */}
 		</div>
