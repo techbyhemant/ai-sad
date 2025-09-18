@@ -6,7 +6,7 @@ const FooterList = ({ heading, items }) => {
 			<h6 className="font-secondary text-xs text-[#d3d8de]">{heading}</h6>
 			<ul className="font-secondary text-sm">
 				{items.map((item) => (
-					<li key={item.name} className="py-1.5">
+					<li key={item.name} className="py-1.5 text-nowrap">
 						{item.name}
 					</li>
 				))}

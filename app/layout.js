@@ -31,7 +31,9 @@ export default function RootLayout({ children }) {
 					<main className="flex flex-col flex-1 justify-start items-center relative min-h-[50vh] mt-5">
 						{children}
 					</main>
-					<div className="py-20">{/* <Footer /> */}</div>
+					<div className="py-10 px-4">
+						<Footer />
+					</div>
 				</div>
 			</body>
 		</html>

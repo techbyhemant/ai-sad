@@ -65,7 +65,7 @@ const Service = ({ heading, image, description }) => {
 
 				<PrimaryBtn
 					title="View more"
-					styles="bg-light-blue"
+					styles="bg-light-blue hover:bg-blue-800"
 					onClick={() => {}}
 				/>
 			</div>

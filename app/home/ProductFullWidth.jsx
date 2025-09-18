@@ -51,7 +51,7 @@ const Slide = ({ image, title, onClick }) => {
 				</h3>
 				<PrimaryBtn
 					title="Know more"
-					styles="bg-white text-black text-md font-normal font-secondary"
+					styles="bg-white text-black text-md font-normal font-secondary hover:bg-gray-500"
 					onClick={onClick}
 				/>
 			</div>

@@ -29,6 +29,7 @@ const FOOTER_NAV_ITEMS = [
 			{ name: 'Export Capabilities', path: '' },
 			{ name: 'Trading, Import/Export Capabilities', path: '' },
 		],
+		isHidden: true,
 	},
 	{
 		heading: 'Pages',
@@ -38,38 +39,39 @@ const FOOTER_NAV_ITEMS = [
 
 const Footer = () => {
 	return (
-		<footer className="max-w-[1240px] mx-auto w-full h-[535px] pt-[64px] pb-[80px] px-20">
-			<div className="flex justify-between gap-24 h-full">
-				<div className="flex flex-col justify-between">
-					<Image src={logoLight} alt="Logo" className="h-[143px] w-[191px]" />
-					<div className="flex gap-10">
-						<FaFacebookSquare
-							className="outline-2 outline-offset-10 rounded-full"
-							size={20}
-						/>
-						<LuInstagram
-							className="outline-2 outline-offset-10 rounded-full"
-							size={20}
+		<footer className="w-screen sm:max-w-[1240px] mx-auto sm:w-full h-[535px] sm:pt-[64px] sm:pb-[80px] sm:px-20">
+			<div className="flex justify-between gap-8 sm:gap-24 h-full w-full flex-wrap sm:flex-nowrap">
+				<div className="flex flex-col justify-between w-full items-start gap-5 sm:gap-0">
+					<Image src={logoLight} alt="Logo" className="h-[115px] w-[155px]" />
+					<div className="flex items-center gap-3 sm:gap-10">
+						<FaFacebookSquare className="border-1 p-3 rounded-full size-12" />
+						<LuInstagram className="border-1 p-3 rounded-full size-12" />
+						<PrimaryBtn
+							title="Get a consultation"
+							styles="font-normal text-sm sm:hidden"
+							onClick={() => {}}
 						/>
 					</div>
 				</div>
 
-				<div className="flex flex-col justify-between">
-					<div className="grid grid-flow-col auto-cols-auto gap-24">
+				<div className="flex flex-col justify-between gap-4 w-screen">
+					<div className="grid grid-flow-col auto-cols-auto gap-10 sm:gap-24">
 						{FOOTER_NAV_ITEMS.map((nav, idx) => (
-							<FooterList key={idx} heading={nav.heading} items={nav.items} />
+							<div className={`${nav.isHidden && 'hidden sm:block'}`} key={idx}>
+								<FooterList heading={nav.heading} items={nav.items} />
+							</div>
 						))}
 						<PrimaryBtn
 							title="Get a consultation"
-							styles="font-normal text-sm"
+							styles="font-normal text-sm hidden sm:block"
 							onClick={() => {}}
 						/>
 					</div>
 
 					<div className="flex items-end justify-between relative w-full">
-						<div className="absolute -top-8 inset-0 w-11 h-[1px] bg-[#04724D]"></div>
+						<div className="absolute -top-5 inset-0 w-11 h-[1px] bg-primary-green" />
 
-						<div className="flex items-end justify-between w-full">
+						<div className="flex items-end justify-between w-full pr-10">
 							<div className="space-y-1">
 								<p className="text-sm">+1 891 989-11-91</p>
 								<p>info@logoipsum.com</p>

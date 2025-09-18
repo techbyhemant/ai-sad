@@ -52,14 +52,14 @@ const Testimonials = () => {
 
 	return (
 		<section className="bg-white w-lvw h-[323px] p-10 sm:p-20 relative">
-			<div className="absolute top-1/2 -left-0 transform -translate-y-1/2 z-20">
+			<div className="absolute top-1/2 left-0 sm:left-20 transform -translate-y-1/2 z-20">
 				<MdKeyboardArrowLeft
 					className="text-black cursor-pointer"
 					size={40}
 					onClick={() => swiperRef.current?.slidePrev()}
 				/>
 			</div>
-			<div className="absolute top-1/2 right-0 transform -translate-y-1/2 z-20">
+			<div className="absolute top-1/2 right-0 sm:right-20 transform -translate-y-1/2 z-20">
 				<MdKeyboardArrowRight
 					className="text-black cursor-pointer"
 					size={40}
@@ -77,7 +77,7 @@ const Testimonials = () => {
 				onSwiper={(swiper) => {
 					swiperRef.current = swiper;
 				}}
-				className="min-w-[291px]!"
+				className="min-w-[291px] sm:max-w-6xl"
 			>
 				{TESTIMONIALS.map((testimonial) => (
 					<SwiperSlide key={testimonial.id}>

@@ -7,6 +7,7 @@ import Testimonials from './home/Testimonials';
 import NewsAndArticles from './home/NewsAndArticles';
 import ProductFullWidth from './home/ProductFullWidth';
 import Locations from './home/Locations';
+import Footer from './Footer';
 
 export default function Home() {
 	return (
@@ -22,7 +23,6 @@ export default function Home() {
 				<NewsAndArticles />
 				<ProductFullWidth />
 			</main>
-			{/* <Footer /> */}
 		</div>
 	);
 }
