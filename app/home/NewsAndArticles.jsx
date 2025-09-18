@@ -28,33 +28,39 @@ const ARTICLES = [
 
 const Article = ({ image, heading, description }) => {
 	return (
-		<div className="flex flex-col gap-6 h-full">
-			<Image
-				src={image}
-				alt={heading}
-				className="object-cover h-[232px] w-full"
-			/>
-			<div className="flex flex-col gap-3">
-				<h4 className="font-semibold text-2xl">{heading}</h4>
-				<p className="font-secondary font-medium text-md">{description}</p>
+		<article className="space-y-5 overflow-hidden">
+			<div className="h-[232px] w-full relative">
+				<Image src={image} alt={heading} fill className="object-cover" />
 			</div>
-		</div>
+			<div className="">
+				<h4 className="font-semibold text-2xl">{heading}</h4>
+				<p className="font-secondary font-medium text-md mt-2">{description}</p>
+			</div>
+		</article>
 	);
 };
 
 const NewsAndArticles = () => {
 	return (
-		<section className="py-24 px-20 space-y-11">
-			<h3 className="font-primary font-bold text-4xl">New & Articles</h3>
-			<div className="grid grid-cols-3 gap-20 ">
-				{ARTICLES.map((article) => (
-					<Article
-						key={article.id}
-						image={article.image}
-						heading={article.heading}
-						description={article.description}
-					/>
-				))}
+		<section className="py-10 px-4 w-full sm:py-24 sm:px-20 space-y-6 sm:space-y-11">
+			<h3 className="font-primary font-bold text-xl sm:text-4xl">
+				New & Articles
+			</h3>
+			<div className="overflow-hidden w-full">
+				<div className="flex gap-6 overflow-x-auto flex-nowrap pb-4 sm:grid sm:grid-cols-3 sm:gap-20 sm:overflow-visible scrollbar-hide snap-x snap-mandatory">
+					{ARTICLES.map((article) => (
+						<div
+							key={article.id}
+							className="min-w-full flex-1 snap-center sm:min-w-0"
+						>
+							<Article
+								image={article.image}
+								heading={article.heading}
+								description={article.description}
+							/>
+						</div>
+					))}
+				</div>
 			</div>
 		</section>
 	);

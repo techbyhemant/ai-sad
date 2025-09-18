@@ -153,4 +153,13 @@
 	.swiper-pagination-bullet-active {
 		@apply bg-[#9B9B9B]!;
 	}
+
+	.scrollbar-hide::-webkit-scrollbar {
+		@apply hidden; /* Chrome */
+	}
+
+	.scrollbar-hide {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
 }

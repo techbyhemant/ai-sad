@@ -19,7 +19,7 @@ export default function Home() {
 				<Services />
 				<Locations />
 				<Testimonials />
-				{/* <NewsAndArticles /> */}
+				<NewsAndArticles />
 				{/* <ProductFullWidth /> */}
 			</main>
 			{/* <Footer /> */}
