@@ -1,5 +1,3 @@
-import Footer from './home/Footer';
-import Header from './home/Header';
 import Products from './home/Products';
 import Categories from './home/Categories';
 import Stats from './home/Stats';
@@ -9,12 +7,12 @@ import Testimonials from './home/Testimonials';
 import NewsAndArticles from './home/NewsAndArticles';
 import ProductFullWidth from './home/ProductFullWidth';
 import Locations from './home/Locations';
+import Footer from './Footer';
 
 export default function Home() {
 	return (
-		<div className="flex flex-col ">
-			<Header />
-			<main className="flex-1 max-w-[1240px] mx-auto w-full h-full">
+		<div className="flex flex-col overflow-x-hidden">
+			<main className="w-full max-w-[1440px] mx-auto h-full">
 				<Categories />
 				<Products />
 				<Values />
@@ -25,7 +23,6 @@ export default function Home() {
 				<NewsAndArticles />
 				<ProductFullWidth />
 			</main>
-			<Footer />
 		</div>
 	);
 }
