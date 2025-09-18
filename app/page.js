@@ -13,7 +13,7 @@ export default function Home() {
 	return (
 		<div className="flex flex-col overflow-x-hidden">
 			<main className="w-full max-w-[1440px] mx-auto h-full">
-				{/* <Categories /> */}
+				<Categories />
 				<Products />
 				<Values />
 				<Stats />

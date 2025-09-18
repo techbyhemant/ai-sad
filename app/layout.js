@@ -25,10 +25,10 @@ export default function RootLayout({ children }) {
 				className={`${getInstrumentSans.variable} ${getNunitoSans.variable} antialiased`}
 			>
 				<div className="flex flex-col w-full h-full min-h-[100vh] overflow-x-hidden">
-					<div className="h-5 w-full bg-white backdrop-blur-md py-4 items-center fixed top-0 z-10">
+					<div className="h-5 w-full bg-light-blue sm:bg-white backdrop-blur-md py-4 items-center fixed top-0 z-10 hidden sm:block">
 						<Header />
 					</div>
-					<main className="flex flex-col flex-1 justify-start items-center relative min-h-[50vh] mt-5">
+					<main className="flex flex-col flex-1 justify-start items-center relative min-h-[50vh] mt-0 sm:mt-5">
 						{children}
 					</main>
 					<div className="py-10 px-4">
