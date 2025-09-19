@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const FooterList = ({ heading, items }) => {
@@ -6,9 +7,9 @@ const FooterList = ({ heading, items }) => {
 			<h6 className="font-secondary text-xs text-[#d3d8de]">{heading}</h6>
 			<ul className="font-secondary text-sm">
 				{items.map((item) => (
-					<li key={item.name} className="py-1.5 text-nowrap">
-						{item.name}
-					</li>
+					<Link key={item.name} href={item?.path}>
+						<li className="py-1.5 text-nowrap">{item.name}</li>
+					</Link>
 				))}
 			</ul>
 		</div>
