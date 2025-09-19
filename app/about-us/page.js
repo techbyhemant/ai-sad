@@ -4,6 +4,7 @@ import BrandTimeline from './components/BrandTimeline';
 import BrandValues from './components/BrandValues';
 import Products from './components/Products';
 import People from './components/People';
+import Explore from './components/Explore';
 
 const page = () => {
 	return (
@@ -14,6 +15,7 @@ const page = () => {
 				<BrandValues />
 				<Products />
 				<People />
+				<Explore />
 			</div>
 		</div>
 	);

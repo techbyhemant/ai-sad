@@ -7,25 +7,25 @@ const PEOPLE = [
 	{
 		id: 1,
 		name: 'Name of person',
-		designation: 'designation',
+		designation: 'Designation',
 		image: people,
 	},
 	{
 		id: 2,
 		name: 'Name of person',
-		designation: 'designation',
+		designation: 'Designation',
 		image: people,
 	},
 	{
 		id: 3,
 		name: 'Name of person',
-		designation: 'designation',
+		designation: 'Designation',
 		image: people,
 	},
 	{
 		id: 4,
 		name: 'Name of person',
-		designation: 'designation',
+		designation: 'Designation',
 		image: people,
 	},
 ];
@@ -33,7 +33,7 @@ const People = () => {
 	return (
 		<div className="py-10 px-4 md:p-20 w-screen md:w-full space-y-4 md:space-y-9">
 			<div className="flex items-center justify-between w-full">
-				<h3 className="text-xl md:text-5xl font-semibold font-primary">
+				<h3 className="text-xl md:text-5xl font-semibold md:font-bold font-primary">
 					People of Al Sad
 				</h3>
 				<PrimaryBtn title="View more" />
@@ -48,8 +48,10 @@ const People = () => {
 							priority
 						/>
 						<div className="text-center">
-							<h5 className="font-primary font-semibold text-md">{p.name}</h5>
-							<p className="text-xs font-normal">{p.designation}</p>
+							<h5 className="font-primary font-semibold text-md md:text-2xl">
+								{p.name}
+							</h5>
+							<p className="text-xs md:text-xl font-normal">{p.designation}</p>
 						</div>
 					</div>
 				))}
