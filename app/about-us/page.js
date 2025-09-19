@@ -3,6 +3,7 @@ import Hero from './components/Hero';
 import BrandTimeline from './components/BrandTimeline';
 import BrandValues from './components/BrandValues';
 import Products from './components/Products';
+import People from './components/People';
 
 const page = () => {
 	return (
@@ -12,6 +13,7 @@ const page = () => {
 				<BrandTimeline />
 				<BrandValues />
 				<Products />
+				<People />
 			</div>
 		</div>
 	);
