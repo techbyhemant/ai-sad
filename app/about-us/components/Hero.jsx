@@ -10,6 +10,7 @@ const Hero = () => {
 				alt="about us"
 				className="object-cover h-full w-full"
 			/>
+			{/* overlay */}
 			<div className="h-full w-full absolute bg-black opacity-50" />
 			<div className="absolute h-full w-full flex flex-col justify-between p-4">
 				<div className="flex-1 flex items-center justify-center">
@@ -19,7 +20,7 @@ const Hero = () => {
 						className="h-[136px] sm:h-[340px] w-[453px]"
 					/>
 				</div>
-				<div className="absolute bottom-5 left-3 right-3 bg-primary py-5 px-4 space-y-3 sm:hidden rounded-sm">
+				<div className="bottom-5 left-3 right-0 bg-primary py-5 px-4 space-y-3 sm:hidden rounded-sm w-[362px]">
 					<h4 className="font-primary font-semibold text-xl">Who are we</h4>
 					<p className="text-sm">
 						Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa

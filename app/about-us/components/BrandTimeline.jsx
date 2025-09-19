@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import map from '../../../public/assets/images/map-gray.png';
 import timelineOne from '../../../public/assets/images/timeline-1.jpg';
@@ -63,6 +63,11 @@ const BrandTimeline = () => {
 	const [activeEventId, setActiveEventId] = useState(1);
 	const [activeEvent, setActiveEvent] = useState(null);
 
+	// horizontal scroll state
+	const [active, setActive] = useState(0);
+	const itemsRef = useRef([]);
+	const containerRef = useRef(null);
+
 	const getActiveEvent = () => {
 		const activeEvent = TIMELINE.find((evt) => evt.id === activeEventId);
 		setActiveEvent(activeEvent);
@@ -72,61 +77,142 @@ const BrandTimeline = () => {
 		activeEventId && getActiveEvent();
 	}, [activeEventId]);
 
+	const handleSlideClick = (index) => {
+		setActive(index);
+		itemsRef.current[index]?.scrollIntoView({
+			behavior: 'smooth',
+			inline: 'end',
+			block: 'nearest',
+		});
+	};
+
+	useEffect(() => {
+		if (!containerRef.current) return;
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						const index = Number(entry.target.getAttribute('data-index'));
+						setActive(index);
+					}
+				});
+			},
+			{
+				root: containerRef.current,
+				threshold: 0.6,
+			}
+		);
+
+		itemsRef.current.forEach((item) => {
+			if (item) observer.observe(item);
+		});
+
+		return () => observer.disconnect();
+	}, []);
+
 	return (
-		<div className="flex gap-10 items-start py-5 pl-[77px] p-10 pr-0">
-			<div className="flex flex-col items-start p-8 pr-0 ">
-				<ul className="list-disc! marker:text-2xl space-y-12! relative">
-					<div className="w-px bg-white h-full absolute -left-4" />
-					{TIMELINE.map((timeline, index) => (
-						<li
-							key={timeline.id}
-							className={`cursor-pointer ${
-								activeEventId === timeline?.id ? 'opacity-100' : 'opacity-25!'
-							}`}
-							onClick={() => setActiveEventId(timeline?.id)}
-						>
-							<h4 className="font-secondary text-[28px] font-bold!">
-								{timeline.title}
-							</h4>
-							<p className="text-xl mt-3">{timeline.description}</p>
-						</li>
-					))}
-				</ul>
+		<>
+			<div className="hidden md:flex py-5 pl-[77px] p-10 pr-0 w-full flex-nowrap">
+				{/* Vertical Timeline */}
+				<div className="flex flex-col items-start p-8 pr-0 w-fit">
+					<ul className="list-disc! marker:text-2xl space-y-12! relative">
+						<div className="w-px bg-white h-full absolute -left-4" />
+						{TIMELINE.map((timeline, index) => (
+							<li
+								key={timeline.id}
+								className={`cursor-pointer w-[329px] ${
+									activeEventId === timeline?.id ? 'opacity-100' : 'opacity-25!'
+								}`}
+								onClick={() => setActiveEventId(timeline?.id)}
+							>
+								<h4 className="font-secondary text-[28px] font-bold!">
+									{timeline.title}
+								</h4>
+								<p className="text-xl mt-3">{timeline.description}</p>
+							</li>
+						))}
+					</ul>
+				</div>
+
+				<div className="relative! w-1/2 h-[630px] flex-1">
+					<Image
+						src={map}
+						alt="Timeline map"
+						className="object-contain absolute h-full w-full"
+					/>
+					<div className="absolute top-0 bg-gradient-to-r from-[#0e2143]/90 via-[#0e2143]/70 to-white/0 h-full w-full" />
+
+					{activeEvent && (
+						<div className="w-full h-full absolute">
+							{activeEvent.imageDes && (
+								<div className="bg-[#19417C] rounded-tl-sm rounded-bl-sm p-6 w-[569px] absolute right-0 top-10">
+									<p className="font-secondary font-semibold text-2xl text-right">
+										{activeEvent?.imageDes}
+									</p>
+								</div>
+							)}
+							{activeEvent.image.map((img, idx) => (
+								<div
+									key={idx}
+									className={`bg-white w-[300px] h-[200px] p-2 rounded-sm absolute ${img?.position}`}
+								>
+									<Image
+										src={img.src}
+										alt="Timeline Photo"
+										className="h-[150px] w-full object-cover"
+									/>
+								</div>
+							))}
+						</div>
+					)}
+				</div>
 			</div>
 
-			<div className="relative! w-full h-[630px]">
-				<Image
-					src={map}
-					alt="Timeline map"
-					className="absolute h-full w-full"
-				/>
-				<div className="absolute top-0 bg-gradient-to-r from-[#0e2143]/90 via-[#0e2143]/70 to-white/0 h-full w-full" />
-
-				{activeEvent && (
-					<div className="w-full h-full absolute">
-						{activeEvent.imageDes && (
-							<div className="bg-[#19417C] rounded-tl-sm rounded-bl-sm p-6 w-[569px] absolute right-0 top-10">
-								<p className="font-secondary font-semibold text-2xl text-right">
-									{activeEvent?.imageDes}
-								</p>
-							</div>
-						)}
-						{activeEvent.image.map((img, idx) => (
-							<div
+			{/* Horizontal Timeline */}
+			<div className="w-screen md:hidden py-14 space-y-7 relative">
+				<div className="">
+					<ul
+						ref={containerRef}
+						className="flex overflow-x-auto scrollbar-hide flex-nowrap gap-4 scroll-smooth snap-x snap-mandatory relative"
+					>
+						{TIMELINE.map((tl, idx) => (
+							<li
 								key={idx}
-								className={`bg-white w-[300px] h-[200px] p-2 rounded-sm absolute ${img?.position}`}
+								data-index={idx}
+								ref={(el) => (itemsRef.current[idx] = el)}
+								onClick={() => handleSlideClick(idx)}
+								className={`flex-shrink-0 flex flex-col gap-6 justify-start items-start snap-start h-full after:content-[''] after:bottom-2 after:w-[15px] after:h-[15px] after:rounded-full after:bg-white after:float-left px-4 ${
+									active !== idx ? 'opacity-25' : 'opacity-100'
+								} transition-all ease-in-out`}
 							>
 								<Image
-									src={img.src}
+									src={tl.image[0]['src']}
 									alt="Timeline Photo"
-									className="h-[150px] w-full object-cover"
+									className="w-[302px] h-[201px] object-cover rounded-sm"
 								/>
-							</div>
+								<div className="space-y-2">
+									<h4 className="font-primary font-semibold text-xl">
+										{tl.title}
+									</h4>
+									<p className="font-normal text-sm w-[302px]">
+										{tl.description}
+									</p>
+								</div>
+							</li>
 						))}
+					</ul>
+					<div className="bg-white h-px w-full relative bottom-[8px] left-0" />
+				</div>
+				{TIMELINE[active]?.imageDes && (
+					<div className="px-4">
+						<p className="bg-light-blue text-sm italic font-semibold p-3 rounded-sm text-center">
+							{TIMELINE[active]?.imageDes}
+						</p>
 					</div>
 				)}
 			</div>
-		</div>
+		</>
 	);
 };
 
