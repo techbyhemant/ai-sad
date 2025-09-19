@@ -40,28 +40,32 @@ const SERVICES = [
 
 const Service = ({ heading, image, description }) => {
 	return (
-		<div className="flex gap-12 w-full h-full text-black">
-			<div className="w-1/2 flex-1">
+		<div className="flex flex-col sm:flex-row gap-5 md:gap-12 w-full h-full text-black">
+			<div className="w-full sm:w-1/2 flex-1 h-[204px] sm:h-full">
 				<Image
 					src={image}
 					alt={heading}
 					className="object-cover h-full w-full rounded-sm"
 				/>
 			</div>
-			<div className="w-1/2 flex flex-col justify-between items-start gap-20 h-full">
+			<div className="w-full sm:w-1/2 flex flex-col md:justify-between items-start gap-3 sm:gap-20 h-full">
 				<div className="min-w-full space-y-3">
-					<p className="uppercase text-[18px] font-normal">Services we offer</p>
-					<div className="border-b-2 border-[#6E6E6E]" />
+					<p className="uppercase text-xs sm:text-[18px] font-normal">
+						Services we offer
+					</p>
+					<div className="border-b-1 border-[#6E6E6E]" />
 				</div>
 
-				<div className="space-y-5">
-					<h2 className="text-4xl font-bold font-primary">{heading}</h2>
-					<p className="text-xl font-normal">{description}</p>
+				<div className="space-y-3 sm:space-y-5">
+					<h2 className="text-xl sm:text-4xl font-bold font-primary">
+						{heading}
+					</h2>
+					<p className="text-sm sm:text-xl font-normal">{description}</p>
 				</div>
 
 				<PrimaryBtn
 					title="View more"
-					styles="bg-[#19417C]"
+					styles="bg-light-blue hover:bg-blue-800"
 					onClick={() => {}}
 				/>
 			</div>
@@ -71,7 +75,7 @@ const Service = ({ heading, image, description }) => {
 
 const Services = () => {
 	return (
-		<section className="py-28 px-16 w-full h-[840px] bg-white">
+		<section className="pt-10 pb-5 px-4 md:py-28 md:px-16 w-full h-[612px] sm:h-[840px] bg-white">
 			<Swiper
 				direction="vertical"
 				modules={[Mousewheel]}
