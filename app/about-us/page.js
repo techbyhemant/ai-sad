@@ -6,11 +6,13 @@ import Products from './components/Products';
 
 const page = () => {
 	return (
-		<div className="max-w-[1240px] mx-auto">
-			<Hero />
-			<BrandTimeline />
-			<BrandValues />
-			<Products />
+		<div className="flex flex-col overflow-x-hidden">
+			<div className="w-full max-w-[1440px] mx-auto h-full">
+				<Hero />
+				<BrandTimeline />
+				<BrandValues />
+				<Products />
+			</div>
 		</div>
 	);
 };
