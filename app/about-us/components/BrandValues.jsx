@@ -12,7 +12,7 @@ const BrandValues = () => {
 			<Image
 				src={logo}
 				alt="Logo White"
-				className="object-cover h-[100px] w-[133px] md:h-[257px] md:w-[340px]"
+				className="object-cover h-[100px] w-[133px] md:h-[257px] md:w-[343px]"
 			/>
 			<div className="space-y-5">
 				<SimpleVerticalTimeline />
@@ -20,7 +20,7 @@ const BrandValues = () => {
 					<Image
 						src={people}
 						alt="People"
-						className="h-[139px] md:h-[554px] w-[316px] md:w-svw rounded-sm object-fill"
+						className="h-[139px] md:h-[554px] w-[316px] md:w-[1250px] rounded-sm object-fill"
 					/>
 					<p className="text-center w-full text-sm md:text-lg font-secondary">
 						Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa

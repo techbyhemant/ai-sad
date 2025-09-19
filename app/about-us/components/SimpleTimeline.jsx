@@ -64,7 +64,7 @@ const SimpleVerticalTimeline = () => {
 								<Image
 									src={data.icon}
 									alt={data.title}
-									className="h-7 w-7 md:h-full md:w-full"
+									className="h-7 w-7 md:h-13 md:w-13"
 								/>
 								<h5 className="font-secondary font-semibold text-md md:text-[32px]">
 									{data.title}
@@ -81,7 +81,7 @@ const SimpleVerticalTimeline = () => {
 								<Image
 									src={data.icon}
 									alt={data.title}
-									className="h-7 w-7 md:h-full md:w-full"
+									className="h-7 w-7 md:h-13 md:w-13"
 								/>
 								<h5 className="font-secondary font-semibold text-md md:text-[32px]">
 									{data.title}

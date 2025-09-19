@@ -28,7 +28,7 @@ const Products = () => {
 				<div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-b from-black/70 via-black/40 to-transparent pointer-events-none" />
 
 				<div className="absolute inset-0 z-20 flex items-end justify-between md:flex-col md:items-start md:justify-start p-4 md:p-8">
-					<div className="space-y-1">
+					<div className="space-y-1 md:space-y-[10px]">
 						<p className="font-secondary text-xs md:text-md text-white">
 							Get to know
 						</p>
@@ -36,18 +36,21 @@ const Products = () => {
 							BAONE
 						</h4>
 					</div>
-					<PrimaryBtn title="Know more" styles="bg-white text-primary" />
+					<PrimaryBtn
+						title="Know more"
+						styles="bg-white text-primary md:mt-2"
+					/>
 				</div>
 			</div>
 
 			{/* Right Side: Products Section */}
-			<div className="flex-1 bg-primary-green h-full grid grid-cols-2 grid-rows-2 gap-4 p-4">
+			<div className="flex-1 bg-primary-green h-full grid grid-cols-2 grid-rows-2 gap-4 max-w-fit">
 				{PRODUCTS.map((item) => (
 					<div
 						key={item.id}
-						className="flex flex-col items-start w-full gap-4 text-white"
+						className="flex flex-col items-start w-full gap-4 text-white p-8"
 					>
-						<div className="relative w-[166px] h-[142px] md:w-40 md:h-40">
+						<div className="relative w-[166px] h-[142px] md:w-[255px] md:h-[252px]">
 							<Image
 								src={item.img}
 								alt={item.title}
