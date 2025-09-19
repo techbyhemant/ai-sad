@@ -42,7 +42,7 @@ const PRODUCTS = [
 
 const Product = ({ image, title, description, onClick }) => {
 	return (
-		<divj className="flex items-center flex-col gap-8 sm:flex-row sm:gap-14">
+		<div className="flex items-center flex-col gap-8 sm:flex-row sm:gap-14">
 			<Image
 				src={image}
 				alt={title}
@@ -59,7 +59,7 @@ const Product = ({ image, title, description, onClick }) => {
 				<p className="text-sm sm:text-xl text-primary">{description}</p>
 				<PrimaryBtn title="Know more" onClick={onClick} />
 			</div>
-		</divj>
+		</div>
 	);
 };
 

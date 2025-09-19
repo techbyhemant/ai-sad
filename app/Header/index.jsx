@@ -3,6 +3,7 @@ import React from 'react';
 import logoDark from '../../public/assets/logo-dark.svg';
 import { SearchIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export const NAV_ITEMS = [
 	{ name: 'Home', path: '/' },
@@ -18,9 +19,9 @@ const Header = () => {
 			<Image src={logoDark} alt="Logo" width="63" height="47.25" />
 			<nav className="text-[#1e1e1e] font-secondary font-medium text-[18px] hidden sm:flex gap-10 items-center ">
 				{NAV_ITEMS.map((item, idx) => (
-					<p key={idx}>
-						<a href={item.href}>{item.name}</a>
-					</p>
+					<Link href={item?.path} key={idx}>
+						{item.name}
+					</Link>
 				))}
 				<Button variant="ghost" size="icon" className="size-6">
 					<SearchIcon />
