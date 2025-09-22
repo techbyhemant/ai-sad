@@ -7,6 +7,16 @@ import catThree from '../../public/assets/images/cat-3.jpg';
 import catFour from '../../public/assets/images/cat-4.jpg';
 import catFive from '../../public/assets/images/cat-5.jpg';
 import catSix from '../../public/assets/images/cat-6.jpg';
+import {
+	Collapsible,
+	CollapsibleContent,
+	CollapsibleTrigger,
+} from '@/components/ui/collapsible';
+import { Button } from '@/components/ui/button';
+import {
+	MdOutlineKeyboardArrowDown,
+	MdOutlineKeyboardArrowUp,
+} from 'react-icons/md';
 
 const serviceCategories = [
 	{
@@ -216,7 +226,7 @@ const TruncatedList = ({ items, onClick, category }) => {
 			{items.slice(0, MAX_ITEMS + 1).map((item, idx) => (
 				<li
 					key={idx}
-					className={`text-lg ${
+					className={`text-md sm:text-lg ${
 						category === item?.title ? 'font-semibold' : 'font-normal'
 					} font-secondary text-wrap`}
 					onClick={() => onClick(item?.to || item.title)}
@@ -226,7 +236,9 @@ const TruncatedList = ({ items, onClick, category }) => {
 			))}
 
 			{items.length > MAX_ITEMS && (
-				<p className="underline font-secondary font-medium mt-10">Show all</p>
+				<p className="underline font-secondary font-medium mt-2 sm:mt-10">
+					Show all
+				</p>
 			)}
 		</ul>
 	);
@@ -250,21 +262,28 @@ const Categories = () => {
 		getCategoryItems();
 	}, [activeCategory]);
 
+	useEffect(() => {
+		if (expandedSection) {
+			const category = serviceCategories.find(
+				(cat) => cat.id === expandedSection
+			);
+			console.log(category);
+			setActiveCategory(category?.dropdown[0]?.title);
+		}
+	}, [expandedSection]);
 	const getCategoryItems = () => {
 		const category = serviceCategories.filter(
 			(cat) => cat.id === expandedSection
 		)[0];
-		console.log(category);
 		const catItems = category?.dropdown?.filter(
 			(item) => item.title === activeCategory
 		)[0]?.items;
-		console.log(catItems);
 		setItems(catItems || []);
 	};
 
 	return (
-		<section className="relative w-full">
-			<div className="flex h-[773px]">
+		<section className="relative w-full overflow-hidden">
+			<div className="hidden sm:flex h-[773px]">
 				{serviceCategories.map((category) => (
 					<div
 						key={category.id}
@@ -329,6 +348,72 @@ const Categories = () => {
 						)}
 					</div>
 				))}
+			</div>
+
+			<div className="sm:hidden w-screen bg-light-blue">
+				<Collapsible
+					className="flex w-full flex-col"
+					onOpenChange={(open) => {
+						if (!open && expandedSection !== null) {
+							setExpandedSection(null);
+							setActiveCategory(null);
+							setItems([]);
+						}
+					}}
+				>
+					{serviceCategories.map((cat) => (
+						<div
+							className={`border-b-1 w-full px-4 py-2 ${
+								expandedSection === cat.id ? 'bg-light-blue' : 'bg-primary'
+							}`}
+							key={cat.id}
+						>
+							<CollapsibleTrigger
+								className="my-3 w-full"
+								onClick={() => setExpandedSection(cat.id)}
+							>
+								<div className="flex items-center justify-between w-full">
+									<h3 className="text-xl font-semibold font-primary">
+										{cat.title}
+									</h3>
+									{expandedSection === cat.id ? (
+										<MdOutlineKeyboardArrowUp className="size-8" />
+									) : (
+										<MdOutlineKeyboardArrowDown className="size-8" />
+									)}
+									<span className="sr-only">Toggle</span>
+								</div>
+							</CollapsibleTrigger>
+							{expandedSection === cat.id && (
+								<CollapsibleContent>
+									<div className="overflow-hidden w-full space-y-5">
+										<div className="flex gap-4 w-full overflow-x-auto scrollbar-hide text-white">
+											{cat.dropdown.map((dp) => (
+												<h5
+													key={dp.title}
+													className={`py-1 px-3 rounded-full  text-sm text-nowrap ${
+														activeCategory === dp.title
+															? 'bg-white text-primary'
+															: 'bg-transparent text-white'
+													}`}
+													onClick={() => {
+														setActiveCategory(dp.title);
+														setItems(dp.items);
+													}}
+												>
+													{dp.title}
+												</h5>
+											))}
+										</div>
+										<div className="px-3 pb-4">
+											<TruncatedList items={items} />
+										</div>
+									</div>
+								</CollapsibleContent>
+							)}
+						</div>
+					))}
+				</Collapsible>
 			</div>
 		</section>
 	);
