@@ -45,7 +45,7 @@ const Service = ({ heading, image, description }) => {
 				<Image
 					src={image}
 					alt={heading}
-					className="object-cover h-full w-full rounded-sm"
+					className="object-cover h-full rounded-sm"
 				/>
 			</div>
 			<div className="w-full sm:w-1/2 flex flex-col md:justify-between items-start gap-3 sm:gap-20 h-full">

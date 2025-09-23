@@ -117,7 +117,7 @@ const BrandTimeline = () => {
 				{/* Vertical Timeline */}
 				<div className="flex flex-col items-start p-8 pr-0 w-fit">
 					<ul className="list-disc! marker:text-2xl space-y-12! relative">
-						<div className="w-px bg-white h-full absolute -left-4" />
+						<div className="w-px bg-white h-full absolute -left-[19px]" />
 						{TIMELINE.map((timeline, index) => (
 							<li
 								key={timeline.id}
