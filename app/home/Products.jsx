@@ -42,14 +42,14 @@ const PRODUCTS = [
 
 const Product = ({ image, title, description, onClick }) => {
 	return (
-		<div className="flex items-center flex-col gap-8 sm:flex-row sm:gap-14">
+		<div className="flex sm:items-center gap-8 flex-col sm:flex-row sm:gap-14">
 			<Image
 				src={image}
 				alt={title}
-				className="w-3/2 sm:w-1/2 object-cover rounded-sm h-[153px] sm:h-full md:h-[327px]"
+				className="w-full sm:max-w-[585px] object-cover rounded-sm h-[153px] sm:h-[327px]"
 			/>
 
-			<div className="sm:w-1/2 flex flex-col items-start gap-4">
+			<div className="w-full sm:max-w-[631px] flex flex-col items-start gap-4">
 				<p className="font-secondary text-xs sm:text-sm font-semibold text-[#19417C]">
 					NEW LAUNCH
 				</p>
@@ -74,8 +74,8 @@ const Products = () => {
 	}, []);
 
 	return (
-		<section className="bg-white w-lvw py-10 px-4 md:p-[85px] md:pb-16 relative">
-			<div className="relative group mx-auto">
+		<section className="bg-white w-screen sm:w-full py-10 px-4 sm:p-[85px] md:pb-16 relative">
+			<div className="relative group mx-auto w-full sm:max-w-[1440px] sm:w-full">
 				{activeIndex > 0 && (
 					<div className="absolute top-1/2 left-0 sm:-left-10 transform -translate-y-1/2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 						<MdKeyboardArrowLeft
@@ -110,7 +110,7 @@ const Products = () => {
 						swiperRef.current = swiper;
 					}}
 					onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-					className="h-full"
+					className="h-full w-full"
 				>
 					{PRODUCTS.map((product) => (
 						<SwiperSlide key={product.id}>
