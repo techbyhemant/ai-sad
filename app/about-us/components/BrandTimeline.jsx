@@ -12,6 +12,12 @@ import timelineSix from '../../../public/assets/images/timeline-6.jpg';
 
 import Image from 'next/image';
 
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 const TIMELINE = [
 	{
 		id: 1,
@@ -68,6 +74,16 @@ const BrandTimeline = () => {
 	const itemsRef = useRef([]);
 	const containerRef = useRef(null);
 
+	const sectionRef = useRef(null);
+	const lastWheelTimeRef = useRef(0);
+	const DEBOUNCE_DELAY = 250;
+
+	const activeIdRef = useRef(activeEventId);
+
+	useEffect(() => {
+		activeIdRef.current = activeEventId;
+	}, [activeEventId]);
+
 	const getActiveEvent = () => {
 		const activeEvent = TIMELINE.find((evt) => evt.id === activeEventId);
 		setActiveEvent(activeEvent);
@@ -86,6 +102,7 @@ const BrandTimeline = () => {
 		});
 	};
 
+	// Horizontal Scroll
 	useEffect(() => {
 		if (!containerRef.current) return;
 
@@ -111,19 +128,98 @@ const BrandTimeline = () => {
 		return () => observer.disconnect();
 	}, []);
 
+	// Vertical Scroll
+	useGSAP(() => {
+		if (typeof window === 'undefined' || window.innerWidth < 768) return;
+		const mm = gsap.matchMedia();
+
+		mm.add('(min-width: 768px)', () => {
+			const section = sectionRef.current;
+			let wheelListenerIsActive = false;
+
+			const handleWheel = (e) => {
+				const now = Date.now();
+				const currentActiveId = activeIdRef.current;
+
+				if (now - lastWheelTimeRef.current < DEBOUNCE_DELAY) return;
+				lastWheelTimeRef.current = now;
+
+				const currentIndex = TIMELINE.findIndex(
+					(t) => t.id === currentActiveId
+				);
+				let nextIndex = currentIndex;
+
+				if (e.deltaY > 0) {
+					// Scroll Down
+					nextIndex = Math.min(currentIndex + 1, TIMELINE.length - 1);
+				} else if (e.deltaY < 0) {
+					// Scroll UP
+					nextIndex = Math.max(currentIndex - 1, 0);
+				}
+
+				if (nextIndex !== currentIndex) {
+					gsap.to(
+						{},
+						{
+							duration: 0.1,
+							onComplete: () => setActiveEventId(TIMELINE[nextIndex].id),
+						}
+					);
+				}
+			};
+
+			const activateWheelListener = () => {
+				if (!wheelListenerIsActive && section) {
+					section.addEventListener('wheel', handleWheel, { passive: false });
+					wheelListenerIsActive = true;
+				}
+			};
+
+			const deactivateWheelListener = () => {
+				if (wheelListenerIsActive && section) {
+					section.removeEventListener('wheel', handleWheel);
+					wheelListenerIsActive = false;
+				}
+			};
+
+			const trigger = ScrollTrigger.create({
+				trigger: section,
+				start: 'top top',
+				end: '+=200',
+				pin: true,
+
+				onEnter: activateWheelListener,
+				onLeave: deactivateWheelListener,
+				onLeaveBack: deactivateWheelListener,
+				onEnterBack: activateWheelListener,
+			});
+
+			return () => {
+				trigger.kill();
+				deactivateWheelListener();
+			};
+		});
+	}, []);
+
 	return (
 		<>
-			<div className="hidden md:flex py-5 pl-[77px] p-10 pr-0 w-full flex-nowrap">
+			<div
+				className="hidden md:flex py-5 pl-[77px] p-10 pr-0 w-full flex-nowrap h-screen"
+				ref={sectionRef}
+			>
 				{/* Vertical Timeline */}
 				<div className="flex flex-col items-start p-8 pr-0 w-fit">
-					<ul className="list-disc! marker:text-2xl space-y-12! relative">
+					<ul
+						className="list-disc! marker:text-2xl space-y-12! relative"
+						ref={containerRef}
+					>
 						<div className="w-px bg-white h-full absolute -left-[19px]" />
-						{TIMELINE.map((timeline, index) => (
+						{TIMELINE.map((timeline, idx) => (
 							<li
 								key={timeline.id}
 								className={`cursor-pointer w-[329px] ${
 									activeEventId === timeline?.id ? 'opacity-100' : 'opacity-25!'
-								}`}
+								} transition-opacity duration-300`}
 								onClick={() => setActiveEventId(timeline?.id)}
 							>
 								<h4 className="font-secondary text-[28px] font-bold!">

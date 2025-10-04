@@ -1,11 +1,17 @@
-import { RiScalesLine } from 'react-icons/ri';
-import integrity from '../../../public/assets/icons/integrity.svg';
+import Image from 'next/image';
 import commitment from '../../../public/assets/icons/commitment.svg';
 import excellence from '../../../public/assets/icons/excellence.svg';
 import innovation from '../../../public/assets/icons/innovation.svg';
+import integrity from '../../../public/assets/icons/integrity.svg';
 import sustainability from '../../../public/assets/icons/sustainability.svg';
 import teamwork from '../../../public/assets/icons/teamwork.svg';
-import Image from 'next/image';
+
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const TIMELINE_DATA = [
 	{
@@ -53,11 +59,49 @@ const TIMELINE_DATA = [
 ];
 
 const SimpleVerticalTimeline = () => {
+	const container = useRef();
+	const itemRefs = useRef([]);
+	itemRefs.current = [];
+
+	const addToRefs = (el) => {
+		if (el && !itemRefs.current.includes(el)) {
+			itemRefs.current.push(el);
+		}
+	};
+
+	useGSAP(
+		() => {
+			if (window.innerWidth < 768) return;
+
+			itemRefs.current.forEach((item, idx) => {
+				gsap.fromTo(
+					item,
+					{ opacity: 0, y: 50 },
+					{
+						opacity: 1,
+						y: 0,
+						duration: 1,
+						ease: 'power3.out',
+						scrollTrigger: {
+							trigger: item,
+							start: 'top 80%',
+							end: 'bottom 20%',
+							toggleActions: 'play reverse play reverse',
+						},
+					}
+				);
+			});
+		},
+		{ scope: container, dependencies: [] }
+	);
 	return (
-		<div className="relative max-w-3xl mx-auto p-8">
+		<div
+			className="relative max-w-3xl mx-auto p-8 overflow-visible"
+			ref={container}
+		>
 			<div className="absolute left-1/2 top-0 h-full w-px bg-gray-300 transform -translate-x-1/2" />
 			{TIMELINE_DATA.map((data, idx) => (
-				<div key={data.id}>
+				<div key={data.id} id={`value-${idx}`} ref={addToRefs}>
 					{idx % 2 === 0 ? (
 						<div className="h-fit md:h-[130px] max-w-[153px] md:max-w-[450px] w-full relative -left-15 md:-left-70">
 							<div className="flex items-center gap-[6px] md:gap-4 justify-end">

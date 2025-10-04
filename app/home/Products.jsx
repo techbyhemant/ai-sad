@@ -75,7 +75,7 @@ const Products = () => {
 
 	return (
 		<section className="bg-white w-screen sm:w-full py-10 px-4 sm:p-[85px] md:pb-16 relative">
-			<div className="relative group mx-auto w-full sm:max-w-[1440px] sm:w-full">
+			<div className="relative group mx-auto w-full sm:max-w-[1270px] sm:w-full">
 				{activeIndex > 0 && (
 					<div className="absolute top-1/2 left-0 sm:-left-10 transform -translate-y-1/2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 						<MdKeyboardArrowLeft

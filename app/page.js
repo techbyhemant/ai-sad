@@ -1,3 +1,5 @@
+'use client';
+
 import Products from './home/Products';
 import Categories from './home/Categories';
 import Stats from './home/Stats';
@@ -8,21 +10,41 @@ import NewsAndArticles from './home/NewsAndArticles';
 import ProductFullWidth from './home/ProductFullWidth';
 import Locations from './home/Locations';
 import Footer from './Footer';
+import Header from './Header';
+
+import SplashScreen from './components/Splash';
+import { useState } from 'react';
 
 export default function Home() {
+	const [mounted, setMounted] = useState(false);
+
 	return (
-		<div className="flex flex-col overflow-x-hidden">
-			<main className="w-full max-w-[1440px] mx-auto h-full">
-				<Categories />
-				<Products />
-				<Values />
-				<Stats />
-				<Services />
-				<Locations />
-				<Testimonials />
-				<NewsAndArticles />
-				<ProductFullWidth />
-			</main>
-		</div>
+		<>
+			{!mounted ? (
+				<>
+					<div className="h-[85px] w-full bg-light-blue sm:bg-white backdrop-blur-md py-4 items-center fixed top-0 z-[100] hidden sm:block">
+						<Header />
+					</div>
+					<main className="flex flex-col flex-1 justify-start items-center relative min-h-screen mt-0 sm:mt-[85px] overflow-x-hidden">
+						<div className="w-full mx-auto h-full">
+							<Categories />
+							<Products />
+							<Values />
+							<Stats />
+							<Services />
+							<Locations />
+							<Testimonials />
+							<NewsAndArticles />
+							<ProductFullWidth />
+						</div>
+					</main>
+					<div className="py-10 px-4">
+						<Footer />
+					</div>
+				</>
+			) : (
+				<SplashScreen />
+			)}
+		</>
 	);
 }

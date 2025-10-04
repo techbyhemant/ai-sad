@@ -90,7 +90,7 @@ const Locations = () => {
 					animation: fadeInDelay 0.5s ease-out 0.2s both;
 				}
 			`}</style>
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div className="max-w-full mx-auto px-4 sm:px-6 lg:px-18 bg-white">
 				<div className="flex justify-between items-start ">
 					<h2 className="text-2xl sm:text-4xl font-bold text-gray-900 leading-tight sm:max-w-[380px]">
 						Growing Steadily With Finesse
@@ -109,7 +109,6 @@ const Locations = () => {
 						}}
 						width={800}
 						height={500}
-						style={{ width: '100%', height: 'auto' }}
 					>
 						<Geographies geography={geoUrl}>
 							{({ geographies }) =>
@@ -184,7 +183,7 @@ const Locations = () => {
 						{locations.map((location, index) => (
 							<Marker key={index} coordinates={location.coordinates}>
 								<circle
-									r={10}
+									r={8}
 									fill="#1f2937"
 									stroke={
 										selectedLocation.name === location.name

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+// import { motion, scale, stagger } from 'framer-motion';
 import catOne from '../../public/assets/images/cat-1.jpg';
 import catTwo from '../../public/assets/images/cat-2.jpg';
 import catThree from '../../public/assets/images/cat-3.jpg';
@@ -12,11 +13,16 @@ import {
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from '@/components/ui/collapsible';
-import { Button } from '@/components/ui/button';
+// import { Button } from '@/components/ui/button';
 import {
 	MdOutlineKeyboardArrowDown,
 	MdOutlineKeyboardArrowUp,
 } from 'react-icons/md';
+
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(useGSAP);
 
 const serviceCategories = [
 	{
@@ -244,6 +250,30 @@ const TruncatedList = ({ items, onClick, category }) => {
 	);
 };
 
+// const container = {
+// 	hidden: {},
+// 	show: {
+// 		transition: {
+// 			type: 'tween',
+// 			delayChildren: stagger(0.4),
+// 		},
+// 	},
+// };
+
+// const item = {
+// 	hidden: { opacity: 0, scaleY: 0 },
+// 	show: {
+// 		opacity: 1,
+// 		scaleY: 1,
+// 		transition: {
+// 			type: 'spring',
+// 			bounce: 0,
+// 			visualDuration: 1,
+// 			ease: 'linear',
+// 		},
+// 	},
+// };
+
 const Categories = () => {
 	const [expandedSection, setExpandedSection] = useState(null);
 	const [activeCategory, setActiveCategory] = useState(null);
@@ -281,13 +311,24 @@ const Categories = () => {
 		setItems(catItems || []);
 	};
 
+	useGSAP(() => {
+		const tl = gsap.timeline({ defaults: { duration: 0.5 } });
+		tl.fromTo('.strip-1', { y: '100%' }, { y: 0 })
+			.fromTo('.strip-2', { y: '100%' }, { y: 0 })
+			.fromTo('.strip-3', { y: '100%' }, { y: 0 })
+			.fromTo('.strip-4', { y: '100%' }, { y: 0 })
+			.fromTo('.strip-5', { y: '100%' }, { y: 0 });
+	});
+
 	return (
-		<section className="relative w-full overflow-hidden">
-			<div className="hidden sm:flex h-[773px]">
-				{serviceCategories.map((category) => (
+		<section className="relative w-full overflow-hidden md:h-[calc(100vh-85px)]">
+			<div className="hidden sm:flex h-full">
+				{serviceCategories.map((category, idx) => (
 					<div
 						key={category.id}
-						className={`relative cursor-pointer overflow-hidden transition-all duration-500 ${
+						className={`relative cursor-pointer overflow-hidden origin-bottom strip-${
+							idx + 1
+						} ${
 							expandedSection === category.id
 								? 'flex-[2]'
 								: expandedSection
