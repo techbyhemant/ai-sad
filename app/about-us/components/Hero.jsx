@@ -1,8 +1,35 @@
+'use client';
+
 import Image from 'next/image';
 import aboutUsImg from '../../../public/assets/images/about-us.jpg';
 import logo from '../../../public/assets/logo-light.svg';
 
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(useGSAP);
+
 const Hero = () => {
+	useGSAP(() => {
+		const tl = gsap.timeline();
+
+		tl.to('#logo', {
+			scale: 10,
+			opacity: 0,
+			display: 'none',
+			duration: 1,
+			delay: 0.3,
+		}).fromTo(
+			'#intro',
+			{ opacity: 0 },
+			{
+				opacity: 1,
+				y: -10,
+				duration: 0.8,
+			}
+		);
+	});
+
 	return (
 		<div className="flex flex-col justify-center items-center h-screen w-full relative">
 			<Image
@@ -18,11 +45,17 @@ const Hero = () => {
 						src={logo}
 						alt="Logo"
 						className="h-[136px] sm:h-[340px] w-[453px]"
+						id="logo"
 					/>
 				</div>
-				<div className="bottom-5 left-3 right-0 bg-primary py-5 px-4 space-y-3 sm:hidden rounded-sm w-[362px]">
-					<h4 className="font-primary font-semibold text-xl">Who are we</h4>
-					<p className="text-sm">
+				<div
+					className="relative bottom-5 left-3 sm:left-[10%] right-0 bg-primary py-5 px-4 sm:p-10 space-y-3  rounded-sm sm:rounded-[12px] w-[362px] sm:w-[1090px]"
+					id="intro"
+				>
+					<h4 className="font-primary font-semibold text-xl sm:text-4xl">
+						Who are we
+					</h4>
+					<p className="text-sm sm:text-xl">
 						Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa
 						mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien
 						fringilla, mattis ligula consectetur, ultrices mauris. Maecenas

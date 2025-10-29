@@ -15,7 +15,7 @@ export const NAV_ITEMS = [
 
 const Header = () => {
 	return (
-		<header className="flex justify-between max-w-[1240px] mx-auto items-center pl-16 pr-6">
+		<header className="flex justify-between max-w-full mx-auto items-center pl-16 pr-6">
 			<Image src={logoDark} alt="Logo" width="63" height="47.25" />
 			<nav className="text-[#1e1e1e] font-secondary font-medium text-[18px] hidden sm:flex gap-10 items-center ">
 				{NAV_ITEMS.map((item, idx) => (

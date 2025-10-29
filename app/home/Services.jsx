@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 
@@ -7,12 +8,12 @@ import serTwo from '../../public/assets/images/service-2.jpg';
 import serThree from '../../public/assets/images/service-3.jpg';
 import PrimaryBtn from '../shared/Buttons/PrimaryBtn';
 
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
-import { Mousewheel, Navigation, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
+gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother);
 
 const SERVICES = [
 	{
@@ -38,63 +39,98 @@ const SERVICES = [
 	},
 ];
 
-const Service = ({ heading, image, description }) => {
+const Service = ({ heading, image, description, index }) => {
 	return (
-		<div className="flex flex-col sm:flex-row gap-5 md:gap-12 w-full h-full text-black">
-			<div className="w-full sm:w-1/2 flex-1 h-[204px] sm:h-full">
-				<Image
-					src={image}
-					alt={heading}
-					className="object-cover h-full rounded-sm"
-				/>
-			</div>
-			<div className="w-full sm:w-1/2 flex flex-col md:justify-between items-start gap-3 sm:gap-20 h-full">
-				<div className="min-w-full space-y-3">
-					<p className="uppercase text-xs sm:text-[18px] font-normal">
-						Services we offer
-					</p>
-					<div className="border-b-1 border-[#6E6E6E]" />
+		<div
+			className="bg-white px-4 py-5 md:py-28 md:px-16 h-full slide sticky top-0 snap-top"
+			id={`slide-${index}`}
+		>
+			<div className="flex flex-col sm:flex-row gap-5 md:gap-12 w-full text-black items-center h-[619px]  justify-center">
+				<div className="w-full sm:w-1/2 flex-1 h-[204px] sm:h-full">
+					<Image
+						src={image}
+						alt={heading}
+						className="object-cover h-full rounded-sm"
+					/>
 				</div>
+				<div className="w-full sm:w-1/2 flex flex-col md:justify-between items-start gap-3 sm:gap-10 h-full sm:h-full">
+					<div className="min-w-full space-y-3">
+						<p className="uppercase text-xs sm:text-[18px] font-normal">
+							Services we offer
+						</p>
+						<div className="border-b-1 border-[#6E6E6E]" />
+					</div>
 
-				<div className="space-y-3 sm:space-y-5">
-					<h2 className="text-xl sm:text-4xl font-bold font-primary">
-						{heading}
-					</h2>
-					<p className="text-sm sm:text-xl font-normal">{description}</p>
+					<div className="space-y-3 sm:space-y-5">
+						<h2 className="text-xl sm:text-4xl font-bold font-primary">
+							{heading}
+						</h2>
+						<p className="text-sm sm:text-xl font-normal">{description}</p>
+					</div>
+
+					<PrimaryBtn
+						title="View more"
+						styles="bg-light-blue hover:bg-blue-800"
+						onClick={() => {}}
+					/>
 				</div>
-
-				<PrimaryBtn
-					title="View more"
-					styles="bg-light-blue hover:bg-blue-800"
-					onClick={() => {}}
-				/>
 			</div>
 		</div>
 	);
 };
 
 const Services = () => {
+	useGSAP(() => {
+		const slides = document.querySelectorAll('.slide');
+		let mm = gsap.matchMedia();
+		ScrollTrigger.refresh();
+
+		// ScrollSmoother.create({
+		// 	smooth: 1,
+		// 	normalizeScroll: true,
+		// 	effects: true,
+		// });
+		slides.forEach((card, idx) => {
+			if (idx < 2) {
+				// sm - mobile
+				mm.add(
+					{ isMobile: '(max-width: 640px)', isDesktop: '(min-width: 768px)' },
+					(context) => {
+						const { isDesktop } = context.conditions;
+
+						gsap.to(card, {
+							ease: 'power1.inOut',
+							scrollTrigger: {
+								trigger: card,
+								start: isDesktop ? `100vh-=185px top` : '100vh-=100px top',
+								end: isDesktop ? 'bottom 15%' : 'bottom top',
+								scrub: true,
+								pin: true,
+								pinSpacing: false,
+								snap: {
+									snapTo: 1,
+									directional: true,
+									ease: 'power2.out',
+								},
+							},
+						});
+					}
+				);
+			}
+		});
+	});
+
 	return (
-		<section className="pt-10 pb-5 px-4 md:py-28 md:px-16 w-full h-[612px] sm:h-[840px] bg-white">
-			<Swiper
-				direction="vertical"
-				modules={[Mousewheel]}
-				mousewheel={true}
-				pagination={{ clickable: true }}
-				spaceBetween={10}
-				slidesPerView={1}
-				className="h-full"
-			>
-				{SERVICES.map((service) => (
-					<SwiperSlide key={service.id} className="h-full">
-						<Service
-							image={service.image}
-							heading={service.heading}
-							description={service.description}
-						/>
-					</SwiperSlide>
-				))}
-			</Swiper>
+		<section className="bg-white relative scrollbar-hide flex flex-col md:gap-4 scroll-smooth items-center snap-y snap-mandatory">
+			{SERVICES.map((service, idx) => (
+				<Service
+					key={service.id}
+					image={service.image}
+					heading={service.heading}
+					description={service.description}
+					index={idx + 1}
+				/>
+			))}
 		</section>
 	);
 };

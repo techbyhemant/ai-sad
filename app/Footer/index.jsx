@@ -39,7 +39,7 @@ const FOOTER_NAV_ITEMS = [
 
 const Footer = () => {
 	return (
-		<footer className="w-screen sm:max-w-[1240px] mx-auto sm:w-full h-[535px] sm:pt-[64px] sm:pb-[80px] sm:px-20">
+		<footer className="w-screen sm:max-w-full mx-auto sm:w-full h-[535px] sm:pt-[64px] sm:pb-[80px] sm:px-20">
 			<div className="flex justify-between gap-8 sm:gap-24 h-full w-full flex-wrap sm:flex-nowrap">
 				<div className="flex flex-col justify-between w-full items-start gap-5 sm:gap-0">
 					<Image src={logoLight} alt="Logo" className="h-[115px] w-[155px]" />

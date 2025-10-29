@@ -9,7 +9,7 @@ import Explore from './components/Explore';
 const page = () => {
 	return (
 		<div className="flex flex-col overflow-x-hidden">
-			<div className="w-full max-w-[1440px] mx-auto h-full">
+			<div className="w-full max-w-full mx-auto h-full">
 				<Hero />
 				<BrandTimeline />
 				<BrandValues />
