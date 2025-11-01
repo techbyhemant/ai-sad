@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "gsap": "^3.12.5",
     "@mapbox/mapbox-gl-geocoder": "^5.1.2",
     "@radix-ui/react-collapsible": "^1.1.12",
     "@radix-ui/react-slot": "^1.2.3",
