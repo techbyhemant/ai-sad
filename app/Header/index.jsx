@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import logoDark from '../../public/assets/logo-dark.svg';
+import logoLight from '../../public/assets/logo-light.svg';
 import { SearchIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -8,16 +9,25 @@ import Link from 'next/link';
 export const NAV_ITEMS = [
 	{ name: 'Home', path: '/' },
 	{ name: 'About us', path: '/about-us' },
-	{ name: 'Products', path: '/Products' },
+	{ name: 'Products', path: '/products' },
 	{ name: 'Blogs', path: '/blogs' },
 	{ name: 'Contact us', path: '/contact-us' },
 ];
 
-const Header = () => {
+const Header = ({ isWhite }) => {
 	return (
 		<header className="flex justify-between max-w-full mx-auto items-center pl-16 pr-6">
-			<Image src={logoDark} alt="Logo" width="63" height="47.25" />
-			<nav className="text-[#1e1e1e] font-secondary font-medium text-[18px] hidden sm:flex gap-10 items-center ">
+			<Image
+				src={isWhite ? logoLight : logoDark}
+				alt="Logo"
+				width="63"
+				height="47.25"
+			/>
+			<nav
+				className={`${
+					isWhite ? 'text-white' : 'text-[#1e1e1e]'
+				} font-secondary font-medium text-[18px] hidden sm:flex gap-10 items-center`}
+			>
 				{NAV_ITEMS.map((item, idx) => (
 					<Link href={item?.path} key={idx}>
 						{item.name}
