@@ -184,10 +184,9 @@ const BrandTimeline = () => {
 
 			const trigger = ScrollTrigger.create({
 				trigger: section,
-				start: 'top top',
+				start: '-=82 top',
 				end: '+=200',
 				pin: true,
-
 				onEnter: activateWheelListener,
 				onLeave: deactivateWheelListener,
 				onLeaveBack: deactivateWheelListener,
@@ -213,7 +212,7 @@ const BrandTimeline = () => {
 						className="list-disc! marker:text-2xl space-y-12! relative"
 						ref={containerRef}
 					>
-						<div className="w-px bg-white h-full absolute -left-[19px]" />
+						<div className="w-px bg-white h-full absolute -left-[16px]" />
 						{TIMELINE.map((timeline, idx) => (
 							<li
 								key={timeline.id}

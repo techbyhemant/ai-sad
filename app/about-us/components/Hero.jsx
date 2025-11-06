@@ -6,32 +6,47 @@ import logo from '../../../public/assets/logo-light.svg';
 
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const Hero = () => {
-	useGSAP(() => {
-		const tl = gsap.timeline();
+	const sectionRef = useRef(null);
+	useGSAP(
+		() => {
+			const tl = gsap.timeline({
+				scrollTrigger: {
+					trigger: sectionRef.current,
+					start: 'top 80%', // when the top of the section is 80% from the viewport top
+					once: true, // animation runs only once
+				},
+			});
 
-		tl.to('#logo', {
-			scale: 10,
-			opacity: 0,
-			display: 'none',
-			duration: 1,
-			delay: 0.3,
-		}).fromTo(
-			'#intro',
-			{ opacity: 0 },
-			{
-				opacity: 1,
-				y: -10,
-				duration: 0.8,
-			}
-		);
-	});
+			tl.to('#logo', {
+				scale: 10,
+				opacity: 0,
+				display: 'none',
+				duration: 1,
+				delay: 0.3,
+			}).fromTo(
+				'#intro',
+				{ opacity: 0 },
+				{
+					opacity: 1,
+					y: -10,
+					duration: 0.8,
+				}
+			);
+		},
+		{ scope: sectionRef }
+	);
 
 	return (
-		<div className="flex flex-col justify-center items-center h-screen w-full relative">
+		<div
+			ref={sectionRef}
+			className="flex flex-col justify-center items-center h-[calc(100vh-85px)] w-full relative"
+		>
 			<Image
 				src={aboutUsImg}
 				alt="about us"
