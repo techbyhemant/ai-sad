@@ -187,7 +187,6 @@ const BrandTimeline = () => {
 				start: '-=82 top',
 				end: '+=200',
 				pin: true,
-				markers: true,
 				onEnter: activateWheelListener,
 				onLeave: deactivateWheelListener,
 				onLeaveBack: deactivateWheelListener,

@@ -22,10 +22,10 @@ export default function Home() {
 		<>
 			{!mounted ? (
 				<>
-					<div className="h-[85px] w-full bg-light-blue sm:bg-white backdrop-blur-md py-4 items-center fixed top-0 z-[100] hidden sm:block">
+					<div className="h-max sm:h-[85px] w-full bg-white  backdrop-blur-md flex items-center fixed top-0 z-[100]">
 						<Header />
 					</div>
-					<main className="flex flex-col flex-1 justify-start items-center relative min-h-screen mt-0 sm:mt-[85px] overflow-x-hidden">
+					<main className="flex flex-col flex-1 justify-start items-center relative min-h-screen mt-[75px] sm:mt-[85px] overflow-x-hidden">
 						<div className="w-full mx-auto h-full">
 							<Categories />
 							<Products />
